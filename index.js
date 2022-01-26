@@ -27,15 +27,16 @@ app.get('/', async (req, res) =>{
 })
 
 app.post('/', async (req, res) =>{
-    console.log('ezezez');
-    console.log(req.body.loginName);
-    // db.dresseur.find(dresseurName);
-    // if(db.dresseurs.find(dresseurName)){
-    //     res.redirect('inscription.twig');
-    // }else {
-    //     console.log('pas bon');
-    // }
-    // res.redirect('connexion.twig')
+    const dresseurName = req.body.loginName;
+    let test = await Dresseur.findOne({name: dresseurName});
+    console.log(test);
+    if(test != null){
+        res.redirect('/pokedex');
+        console.log("c'est bon");
+    }else {
+        console.log('pas bon');
+        res.render('connexion.twig')
+    }
 })
 
 
@@ -55,4 +56,8 @@ app.get('/addUser', async (req, res) =>{
     res.render('inscription.twig', {
 
     })
+})
+
+app.get('/pokedex', async (req, res) =>{
+    res.render('pokedex.twig')
 })
