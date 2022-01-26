@@ -1,0 +1,19 @@
+{
+  "name": "projet-pokemon",
+  "version": "1.0.0",
+  "description": "pokedex",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Joffrey",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.1",
+    "express": "^4.17.2",
+    "mongoose": "^6.1.8",
+    "nodemon": "^2.0.15",
+    "twig": "^1.15.4"
+  }
+}
