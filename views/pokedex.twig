@@ -1,6 +1,29 @@
 {% include '/template/head.twig'%}
 <body>
-    <h1 class="text-center mt-5">Pokedex 2000</h1>
-    
-</body>
-</html>
+	<a href="/" onclick="disconnect()">Déconnexion</a>
+	<h1 class="text-center mt-5">Pokedex 2000</h1>
+	<div class="main_content">
+		<div class="main_header">
+			<div class="badge">ez</div>
+			<a href="/addPokemon" class="add_pokemon">Ajouter un Pokemon</a>
+		</div>
+		{% block main %}{% endblock %}
+		{% for pokemon in pokemons %}
+			<div class="col-md-3 card mx-auto">
+				<div class="card-body">
+					<h5 class="card-title text-center">{{pokemon.pv}}
+						{{pokemon.dps}}</h5>
+					<p class="card-text text-center">{{pokemon.name}}</p>
+					<div class="row">
+						<div class="col-md-12 text-center">
+							<a href="/updatePokemon/{{pokemon.id}}" class="btn btn-primary ">modifer</a>
+							<a href="/deletePokemon/{{pokemon.id}}" class="btn btn-danger ">supprimer</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		{% endfor %}
+	</div>
+
+	<script src='./main.js'></script>
+</body></html>

@@ -1,0 +1,25 @@
+{% extends "./../pokedex.twig" %}
+{% block main %}
+ <form class="main_form" method="post" action="{% if action == "/updatePokemon" %}{{action}}/{{pokemons._id}}{% else %}{{action}}{% endif %}">
+        <div class="form_title">
+            <h3>Ajouter un Pokemon</h3>
+            <button class="btn btn-danger">X</button>
+        </div>
+		<div class="">
+			<label for="exampleInputEmail1" class="form-label">Son petit nom</label>
+			<input type="test" class="form-control" id="pokemonName" name="name" value="{{pokemons.name}}">
+		</div>
+		<div class="">
+			<label for="exampleInputPassword1" class="form-label">Ses PVs</label>
+			<input type="number" class="form-control" id="pokemonHP" name="pv" value="{{pokemons.pv}}">
+		</div>
+        <div class="">
+			<label for="exampleInputPassword1" class="form-label">Ses DMGs</label>
+			<input type="number" class="form-control" id="pokemonDPS" name="dps" value="{{pokemons.dps}}">
+		</div>
+		
+		<button type="submit" class="btn btn-primary">Ajouter</button>
+	</form>
+</div>
+</div>
+{% endblock %}

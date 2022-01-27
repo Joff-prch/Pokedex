@@ -1,7 +1,9 @@
 import mongoose from 'mongoose';
 
+
 const dresseurSchema = new mongoose.Schema({
-    name: String
+    name: String,
+    pokemons: Array
 })
 
 const Dresseur = mongoose.model('Dresseur', dresseurSchema)

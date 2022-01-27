@@ -1,9 +1,13 @@
 body{
     background-image: url('./img/fond.jpg');
-    color: #fff;
+    background-repeat: no-repeat;
+    background-size:auto;
+    color: black;
 }
 
-
+.blur_body{
+    filter: blur(2px);
+}
 .formx{
     width:20vw;
     margin: 20vh auto 0 auto;
@@ -38,4 +42,72 @@ body{
 }
 .formx button{
     width: 170px;
+}
+
+
+
+
+
+
+
+/* MAIN PAGE */
+
+.main_content {
+    margin: 0 auto;
+    background-color: #fff;
+    opacity: 0.9;
+    border-radius: 22px;
+    width: 70vw;
+    height: 80vh;
+}
+
+.main_header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(70, 70, 70, 0.232);
+    height: 60px;
+    padding: 0 15px;
+}
+.badge{
+    background-color: black;
+}
+
+.main_form{
+    width: 350px;
+    height: 430px;
+    border-radius: 12px;
+    color: black;
+    margin: 0 auto;
+    background-color: rgba(255, 255, 255, 0.73);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.main_form div{
+    width: 200px;
+    margin: 10px auto 0 auto;
+}
+
+.form_title{
+    text-align: center;
+    width: 330px!important;
+}
+
+.form_title button{
+    position: relative;
+    bottom: 75px;
+    left: 153px;
+    font-size: 12px;
+}
+
+.main_form button {
+    margin-top: 20px;
+}
+
+.appear{
+    bottom: 60vh;
 }
