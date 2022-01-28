@@ -111,3 +111,10 @@ body{
 .appear{
     bottom: 60vh;
 }
+
+.main_body_card{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}

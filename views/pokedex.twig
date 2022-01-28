@@ -8,6 +8,7 @@
 			<a href="/addPokemon" class="add_pokemon">Ajouter un Pokemon</a>
 		</div>
 		{% block main %}{% endblock %}
+		<div class="main_body_card">
 		{% for pokemon in pokemons %}
 			<div class="col-md-3 card mx-auto">
 				<div class="card-body">
@@ -23,6 +24,7 @@
 				</div>
 			</div>
 		{% endfor %}
+		</div>
 	</div>
 
 	<script src='./main.js'></script>

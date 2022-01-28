@@ -25,15 +25,17 @@ app.listen(8080, () =>{
 })
 
 
+
+
 app.get('/', async (req, res) =>{
     res.render('connexion.twig')
 })
 
 app.post('/', async (req, res) =>{
     const dresseurName = req.body.loginName;
-    let test = await Dresseur.findOne({name: dresseurName});
-    if(test != null){
-        res.cookie('dresseurName', dresseurName, {maxAge: 900000})
+    let connexion = await Dresseur.findOne({name: dresseurName});
+    if(connexion != null){
+        res.cookie('dresseurID', connexion._id, {maxAge: 900000})
         res.redirect('/pokedex');
         console.log("connexion accepté");
     }else {
@@ -61,12 +63,12 @@ app.get('/addPokemon', async (req, res)=>{
 })
 
 app.post('/addPokemon', async (req, res) =>{
-    let coocki = req.cookies.dresseurName
-    const pokemon = new Pokemon(req.body);
-    Dresseur.updateOne(
-        { name: coocki },
-        { $push: {pokemons:pokemon} }
-     )
+    let coocki = req.cookies.dresseurID
+    const pokemon = await new Pokemon(req.body);
+    await Dresseur.findOneAndUpdate(
+        { _id: coocki },
+        { $push: {pokemons:pokemon} },
+        );
     res.redirect('/pokedex');
 })
 
@@ -95,23 +97,23 @@ app.post('/updatePokemon/:id', async (req, res) =>{
 
 
 
-app.get('/pokedex', async (req, res) =>{
-    const pokemons = await Pokemon.find()
-    console.log(Dresseur);
-    res.render('pokedex.twig', {
-        pokemons : pokemons
-    });
-    // let coocki = req.cookies.dresseurName;
-    // const pokemonUser = await Dresseur.pokemon.find()
-    // res.render('pokedex.twig', {
-    //     pokemons : pokemonUser
-    // })
+app.get('/pokedex/', async (req, res) =>{
+    let coocki = req.cookies.dresseurID;
+    const user =  await Dresseur.findOne({ _id: coocki })
+    let pokemons = user.pokemons
+
+        res.render('pokedex.twig', {
+            pokemons: pokemons
+        });
 
 })
 
 
 app.get('/deletePokemon/:id', async (req, res) =>{
-    Pokemon.deleteOne({_id: req.params.id}, (error, pokemon) =>{
+    let coocki = req.cookies.dresseurID;
+    const user =  await Dresseur.findOne({ _id: coocki })
+    let pokemons = user.pokemons
+    Dresseur.deleteOne({_id: coocki}, (error, pokemon) =>{
         if(error){
             console.log(error);
             res.status(404);
