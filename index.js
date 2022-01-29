@@ -56,47 +56,6 @@ app.post('/inscription', async (req, res) =>{
 })
 
 
-
-app.get('/addPokemon', async (req, res)=>{
-
-    res.render('./template/addPokemon.twig')
-})
-
-app.post('/addPokemon', async (req, res) =>{
-    let coocki = req.cookies.dresseurID
-    const pokemon = await new Pokemon(req.body);
-    await Dresseur.findOneAndUpdate(
-        { _id: coocki },
-        { $push: {pokemons:pokemon} },
-        );
-    res.redirect('/pokedex');
-})
-
-
-app.get('/updatePokemon/:id', async (req, res) =>{
-
-    const pokemon = await Pokemon.findOne({_id: req.params.id});
-    res.render('./template/addPokemon.twig', {
-        pokemon: pokemon,
-        action: "/updatePokemon"
-    })
-})
-
-
-app.post('/updatePokemon/:id', async (req, res) =>{
-    Pokemon.updateOne({_id: req.params.id}, req.body, (error, pokemon)=>{
-        if(error){
-            console.log(error);
-            res.status(404)
-        }else {
-            res.redirect('/')
-        }
-    })
-})
-
-
-
-
 app.get('/pokedex/', async (req, res) =>{
     let coocki = req.cookies.dresseurID;
     const user =  await Dresseur.findOne({ _id: coocki })
@@ -109,17 +68,62 @@ app.get('/pokedex/', async (req, res) =>{
 })
 
 
+app.get('/addPokemon', async (req, res)=>{
+    res.render('./template/addPokemon.twig')
+})
+
+
+app.post('/addPokemon', async (req, res) =>{
+    let coocki = req.cookies.dresseurID
+    const pokemon = await new Pokemon(req.body);
+    await Dresseur.findOneAndUpdate(
+        { _id: coocki },
+        { $push: {pokemons:pokemon} },
+        );
+    res.redirect('/pokedex');
+})
+
+
+
+
+app.get('/updatePokemon/:id', async (req, res) =>{
+    let coocki = req.cookies.dresseurID
+    const pokemon = await Dresseur.findOne({_id:coocki},
+        {pokemons:{_id: req.params._id}});
+    res.render('./template/addPokemon.twig', {
+        pokemons: pokemon,
+        action: "/updatePokemon"
+    })
+})
+
+
+    
+
+app.post('/updatePokemon/:id', async (req, res) =>{
+    let coocki = req.cookies.dresseurID
+    Dresseur.updateOne({_id:coocki},
+        {pokemons: {$set:{_id: req.params._id}}}, req.body, (error, user)=>{
+            if(error){
+                console.log(error);
+                res.status(404)
+            }else {
+                res.redirect('/pokedex')
+            }
+        
+})
+})
+
+
+
+
+
+
+
 app.get('/deletePokemon/:id', async (req, res) =>{
     let coocki = req.cookies.dresseurID;
-    const user =  await Dresseur.findOne({ _id: coocki })
-    let pokemons = user.pokemons
-    Dresseur.deleteOne({_id: coocki}, (error, pokemon) =>{
-        if(error){
-            console.log(error);
-            res.status(404);
-        }else {
-            res.redirect('/pokedex')
-        }
-    })
-
-})
+    await Dresseur.updateOne({_id:coocki},
+        {$pull : {pokemons : {_id:req.params._id}}},
+        { safe: true, multi:true })
+        console.log('dedans');
+        res.redirect('/pokedex')
+    });
