@@ -88,50 +88,39 @@ app.post('/addPokemon', async (req, res) => {
 
 app.get('/updatePokemon/:id', async (req, res) => {
     let coocki = req.cookies.dresseurID;
-    let pokemon = {};
-    let dresseur = await Dresseur.findOne({ _id: coocki})
-    findPokemon(dresseur.pokemons, req.params._id, pokemon);
+    let url = req.params.id;
+    let dresseur = await Dresseur.findOne({ _id: coocki })
+    let pokemon = dresseur.pokemons;
+    await findPokemon(pokemon, url);
     res.render('./template/addPokemon.twig', {
         pokemons: pokemon,
         action: "/updatePokemon"
     })
 })
 
-function findPokemon(dresseur, id, pokemon){
-    for(let i = 0; i <= dresseur.length; i++){
-        if(dresseur[i]._id == id){
-            pokemon = dresseur[i];
-            console.log(pokemon);
-        }
-    }
-    return pokemon
-}
 
 
 
 app.post('/updatePokemon/:id', async (req, res) => {
-    let coocki = req.cookies.dresseurID
-    console.log('ca update');
-    Dresseur.updateOne({_id: req.params._id  }, {
-        $set:
-        {
-            name: req.body.name,
-            pv: req.body.pv,
-            dps: req.body.dps
+    let coocki = req.cookies.dresseurID;
+    let url = req.params.id;
+    const card = await Dresseur.findOne({ _id: coocki });
+    const index = card.pokemons.findIndex(pokemons => pokemons._id == url);
+
+    card.pokemons[index]._id = Date.now();
+    card.pokemons[index].name = req.body.name;
+    card.pokemons[index].pv = req.body.pv;
+    card.pokemons[index].dps = req.body.dps;
+
+    Dresseur.updateOne({ _id: coocki}, { pokemons: card.pokemons } , (error, dresseur) => {
+        if(error){
+            console.log(error);
+            res.status(404);
+        }else{
+            res.redirect('/pokedex')
         }
-    }
-        , (error, pokemon) => {
-            if (error) {
-                console.log(error);
-                res.status(404)
-                console.log("error");
-            } else {
-                res.redirect('/pokedex')
-            }
-
-        })
-})
-
+    })
+});
 
 
 
@@ -140,9 +129,34 @@ app.post('/updatePokemon/:id', async (req, res) => {
 
 app.get('/deletePokemon/:id', async (req, res) => {
     let coocki = req.cookies.dresseurID;
-    await Dresseur.updateOne({ _id: coocki },
-        { $pull: { pokemons: { _id: req.params._id } } },
-        { safe: true, multi: true })
-    console.log('dedans');
+    let url = req.params.id;
+    let user = await Dresseur.findOne({_id: coocki})
+    let pokemon = user.pokemons;
+    await splicePokemon(pokemon, url);
+    await Dresseur.updateOne({_id: coocki}, {pokemons : pokemon})
     res.redirect('/pokedex')
+   
 });
+
+function splicePokemon(pokemon, url){
+    for(let i = 0; i < pokemon.length; i++){
+        if(pokemon[i]._id == url){
+            console.log('spliced' + pokemon[i]);
+            pokemon = pokemon.splice(pokemon[i],1);
+            break;
+        }
+    } 
+    return pokemon
+}
+
+function findPokemon(pokemon, url){
+    for(let i = 0; i < pokemon.length; i++){
+        if(pokemon[i]._id == url){
+            console.log('finded' + pokemon[i]);
+            pokemon = pokemon[i];
+            break;
+        }
+    } 
+    return pokemon
+}
+
