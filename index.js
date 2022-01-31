@@ -87,22 +87,32 @@ app.post('/addPokemon', async (req, res) => {
 
 
 app.get('/updatePokemon/:id', async (req, res) => {
-    let coocki = req.cookies.dresseurID
-    const pokemon = await Dresseur.findOne({ _id: coocki},
-        {pokemons: { _id: req.params._id } });
+    let coocki = req.cookies.dresseurID;
+    let pokemon = {};
+    let dresseur = await Dresseur.findOne({ _id: coocki})
+    findPokemon(dresseur.pokemons, req.params._id, pokemon);
     res.render('./template/addPokemon.twig', {
         pokemons: pokemon,
         action: "/updatePokemon"
     })
 })
 
+function findPokemon(dresseur, id, pokemon){
+    for(let i = 0; i <= dresseur.length; i++){
+        if(dresseur[i]._id == id){
+            pokemon = dresseur[i];
+            console.log(pokemon);
+        }
+    }
+    return pokemon
+}
 
 
 
 app.post('/updatePokemon/:id', async (req, res) => {
     let coocki = req.cookies.dresseurID
     console.log('ca update');
-    Dresseur.updateOne({ _id: coocki}, {pokemons: { _id: req.params._id } }, {
+    Dresseur.updateOne({_id: req.params._id  }, {
         $set:
         {
             name: req.body.name,
