@@ -97,7 +97,7 @@ body{
     width: 330px!important;
 }
 
-.form_title button{
+.form_title a{
     position: relative;
     bottom: 75px;
     left: 153px;

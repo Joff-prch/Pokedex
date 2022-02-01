@@ -91,7 +91,12 @@ app.get('/updatePokemon/:id', async (req, res) => {
     let url = req.params.id;
     let dresseur = await Dresseur.findOne({ _id: coocki })
     let pokemon = dresseur.pokemons;
-    await findPokemon(pokemon, url);
+    for(let i = 0; i < pokemon.length; i++){
+        if(pokemon[i]._id == url){
+            pokemon = pokemon[i];
+            break;
+        }
+    } 
     res.render('./template/addPokemon.twig', {
         pokemons: pokemon,
         action: "/updatePokemon"
@@ -132,31 +137,23 @@ app.get('/deletePokemon/:id', async (req, res) => {
     let url = req.params.id;
     let user = await Dresseur.findOne({_id: coocki})
     let pokemon = user.pokemons;
-    await splicePokemon(pokemon, url);
-    await Dresseur.updateOne({_id: coocki}, {pokemons : pokemon})
+    console.log(pokemon);
+    for(let i = 0; i < pokemon.length; i++){
+        if(pokemon[i]._id == url){
+            if(pokemon.length > 1){
+                console.log('spliced' + pokemon[i]);
+                pokemon.splice(pokemon[i],1);
+                break;
+            }else {
+                console.log('shifted' + pokemon[i]);
+                pokemon.shift();
+                break;
+            }
+        }
+    } 
+    await user.save();
     res.redirect('/pokedex')
    
 });
 
-function splicePokemon(pokemon, url){
-    for(let i = 0; i < pokemon.length; i++){
-        if(pokemon[i]._id == url){
-            console.log('spliced' + pokemon[i]);
-            pokemon = pokemon.splice(pokemon[i],1);
-            break;
-        }
-    } 
-    return pokemon
-}
-
-function findPokemon(pokemon, url){
-    for(let i = 0; i < pokemon.length; i++){
-        if(pokemon[i]._id == url){
-            console.log('finded' + pokemon[i]);
-            pokemon = pokemon[i];
-            break;
-        }
-    } 
-    return pokemon
-}
 
