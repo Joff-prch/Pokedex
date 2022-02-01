@@ -1,7 +1,8 @@
 body{
     background-image: url('./img/fond.jpg');
     background-repeat: no-repeat;
-    background-size:auto;
+    background-size:cover;
+
     color: black;
 }
 
@@ -40,10 +41,19 @@ body{
 .inscription__a{
     left: 35px;
 }
+
+.p_error{
+    position: absolute;
+    top: 430px;
+    background-color: azure;
+}
 .formx button{
     width: 170px;
 }
 
+footer{
+
+}
 
 
 
@@ -55,10 +65,10 @@ body{
 .main_content {
     margin: 0 auto;
     background-color: #fff;
-    opacity: 0.9;
+    opacity: 0.88;
     border-radius: 22px;
     width: 70vw;
-    height: 80vh;
+
 }
 
 .main_header{
@@ -68,6 +78,11 @@ body{
     border-bottom: 1px solid rgba(70, 70, 70, 0.232);
     height: 60px;
     padding: 0 15px;
+}
+.main_header h2{
+    font-size: 26px;
+    position: relative;
+    top: 5px;
 }
 .badge{
     background-color: black;
@@ -116,5 +131,10 @@ body{
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    align-items: center;
+
+}
+
+.badge_img{
+    height: 10px;
+    width: 10px;
 }
