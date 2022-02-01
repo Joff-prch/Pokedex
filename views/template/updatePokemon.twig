@@ -1,7 +1,5 @@
 {% extends "./../pokedex.twig" %}
-{% include '/template/head.twig'%}
 
-{% block main %}
  <form class="main_form" method="post" action="{% if action == "/updatePokemon" %}{{action}}/{{pokemons._id}}{% else %}{{action}}{% endif %}">
         <div class="form_title">
             <h3>Ajouter un Pokemon</h3>
@@ -24,4 +22,3 @@
 	</form>
 </div>
 </div>
-{% endblock %}

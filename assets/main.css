@@ -134,7 +134,19 @@ footer{
 
 }
 
+.card-body{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 .badge_img{
     height: 10px;
     width: 10px;
+}
+
+.poke_img{
+    height: 100px;
+    width: auto;
 }

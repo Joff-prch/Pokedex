@@ -13,9 +13,11 @@
 		{% for pokemon in pokemons %}
 			<div class="col-md-3 card">
 				<div class="card-body">
-					<h5 class="card-title text-center">{{pokemon.name}}</h5>
-					<p class="card-text text-center">Attack Power: {{pokemon.dps}}</p>
-					<p class="card-text text-center">Health: {{pokemon.pv}}</p>
+					<img class="poke_img" src="{{pokemon.src}}">
+					<h5 class="card-title">{{pokemon.name}}</h5>
+					<p class="card-text">Attack Power: {{pokemon.dps}}</p>
+					<p class="card-text">Health: {{pokemon.pv}}</p>
+					<p class="card-text">Type : {{pokemon.type}}</p>
 					<div class="row">
 						<div class="col-md-12 text-center">
 							<a href="/updatePokemon/{{pokemon._id}}" class="btn btn-primary ">modifer</a>

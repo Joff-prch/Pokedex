@@ -89,16 +89,17 @@ app.get('/pokedex/', async (req, res) => {
 
 
 app.get('/addPokemon', async (req, res) => {
-    res.render('./template/addPokemon.twig')
-    // const poke = await axios.get("https://pokeapi.co/api/v2/pokemon/"+Helper.rand())
-    // console.log(poke.data.species.name);
-})
-
-
-app.post('/addPokemon', async (req, res) => {
-    let coocki = req.cookies.dresseurID
-    const pokemon = await new Pokemon(req.body);
+    const coocki = req.cookies.dresseurID
     const dresseur = await Dresseur.findOne({ _id: coocki })
+    const poke = await axios.get("https://pokeapi.co/api/v2/pokemon/"+Helper.rand())
+    const pokemon = await new Pokemon({
+        name : poke.data.species.name,
+        pv: poke.data.stats[0].base_stat,
+        dps: (poke.data.stats[1].base_stat / 5),
+        type: poke.data.types[0].type.name,
+        src: poke.data.sprites.front_default
+
+    });
     await Dresseur.findOneAndUpdate(
         { _id: coocki },
         { $push: { pokemons: pokemon } },
@@ -129,6 +130,9 @@ app.post('/addPokemon', async (req, res) => {
     await dresseurUpdate.save();
     res.redirect('/pokedex');
 })
+
+
+
 
 
 
