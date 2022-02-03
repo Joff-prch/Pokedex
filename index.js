@@ -6,10 +6,12 @@ import cookieParser from "cookie-parser";
 import Pokemon from "./models/Pokemon.js";
 import { Helper } from "./assets/helper/helper.js";
 import axios from "axios";
+import Config from "./config.js";
+
 
 
 const app = express();
-const db = "mongodb+srv://joff:ri7mdb@cluster0.abvtv.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
+const db = Config.database;
 
 Mongoose.connect(db, err => {
     if (err) {
