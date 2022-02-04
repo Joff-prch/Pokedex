@@ -43,17 +43,13 @@ body{
 }
 
 .p_error{
-    position: absolute;
-    top: 430px;
+    position: relative;
     background-color: azure;
 }
 .formx button{
     width: 170px;
 }
 
-footer{
-
-}
 
 
 

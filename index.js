@@ -6,20 +6,12 @@ import cookieParser from "cookie-parser";
 import Pokemon from "./models/Pokemon.js";
 import { Helper } from "./assets/helper/helper.js";
 import axios from "axios";
-import Config from "./config.js";
-
-
+import dataserv from "./config.js"
 
 const app = express();
-const db = Config.database;
+const db = dataserv;
 
-Mongoose.connect(db, err => {
-    if (err) {
-        console.error('error ' + err);
-    } else {
-        console.log('MongoDB ok');
-    }
-})
+Mongoose.connect(db);
 
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(cookieParser());
@@ -27,9 +19,6 @@ app.use(express.static('./assets'));
 app.listen(8080, () => {
     console.log('Le serveur marche');
 })
-
-
-
 
 app.get('/', async (req, res) => {
     res.render('connexion.twig')
@@ -88,8 +77,6 @@ app.get('/pokedex/', async (req, res) => {
 
 })
 
-
-
 app.get('/addPokemon', async (req, res) => {
     const coocki = req.cookies.dresseurID
     const dresseur = await Dresseur.findOne({ _id: coocki })
@@ -133,12 +120,6 @@ app.get('/addPokemon', async (req, res) => {
     res.redirect('/pokedex');
 })
 
-
-
-
-
-
-
 app.get('/updatePokemon/:id', async (req, res) => {
     let coocki = req.cookies.dresseurID;
     let url = req.params.id;
@@ -156,9 +137,6 @@ app.get('/updatePokemon/:id', async (req, res) => {
     })
 })
 
-
-
-
 app.post('/updatePokemon/:id', async (req, res) => {
     let coocki = req.cookies.dresseurID;
     let url = req.params.id;
@@ -173,11 +151,6 @@ app.post('/updatePokemon/:id', async (req, res) => {
     await Dresseur.updateOne({ _id: coocki }, { pokemons: card.pokemons })
     res.redirect('/pokedex');
 });
-
-
-
-
-
 
 app.get('/deletePokemon/:id', async (req, res) => {
     let coocki = req.cookies.dresseurID;
