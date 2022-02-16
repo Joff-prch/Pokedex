@@ -2,13 +2,16 @@ body{
     background-image: url('./img/fond.jpg');
     background-repeat: no-repeat;
     background-size:cover;
-    height: 100vh;
+    height: 100%;
     color: black;
 }
-
-.blur_body{
-    filter: blur(2px);
+main {
+    background-image: url('./img/fond.jpg');
+    background-repeat: no-repeat;
+    background-size:cover;
+    height: 100vh;
 }
+
 .formx{
     width:300px;
     margin: 20vh auto 0 auto;
@@ -88,10 +91,10 @@ body{
     width: 350px;
     height: 430px;
     border-radius: 12px;
+    background-color: red;
     color: black;
-    margin: 0 auto;
+    margin: 20vh auto;
     background-color: rgba(255, 255, 255, 0.73);
-
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -117,10 +120,6 @@ body{
 
 .main_form button {
     margin-top: 20px;
-}
-
-.appear{
-    bottom: 60vh;
 }
 
 .main_body_card{
@@ -180,4 +179,14 @@ body{
         display: none;
     }
 
+    main h1, main h2{
+        color: rgb(255, 255, 255);
+    }
+    
+
+}
+
+
+.udpate__form{
+    width: 500px;
 }
