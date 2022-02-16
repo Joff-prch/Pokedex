@@ -2,7 +2,7 @@ body{
     background-image: url('./img/fond.jpg');
     background-repeat: no-repeat;
     background-size:cover;
-
+    height: 100vh;
     color: black;
 }
 
@@ -10,7 +10,7 @@ body{
     filter: blur(2px);
 }
 .formx{
-    width:20vw;
+    width:300px;
     margin: 20vh auto 0 auto;
     text-align: center;
     display: flex;
@@ -76,7 +76,7 @@ body{
     padding: 0 15px;
 }
 .main_header h2{
-    font-size: 26px;
+    font-size: 2vw;
     position: relative;
     top: 5px;
 }
@@ -145,4 +145,39 @@ body{
 .poke_img{
     height: 100px;
     width: auto;
+}
+
+.badge-sm {
+    display: none;
+}
+@media (max-width: 1024px) {
+  
+}
+
+@media (max-width: 824px) {
+    .main_content{
+        width: 90vw
+    }
+}
+
+@media (max-width: 624px) {
+    .main_header{
+        padding: 0 3px;
+    }
+    .main_header h2{
+        font-size: 3.5vw;
+        top: 4px
+    }
+    .main_header a{
+        text-align: end;
+        width: 60px;
+    }
+    .badge-sm {
+        display: block;
+        font-size: 4vw;
+    }
+    .badge-xl, .add_pokemon span {
+        display: none;
+    }
+
 }
