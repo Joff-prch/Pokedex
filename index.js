@@ -131,9 +131,8 @@ app.get('/updatePokemon/:id', async (req, res) => {
             break;
         }
     }
-    res.render('./template/addPokemon.twig', {
-        pokemons: pokemon,
-        action: "/updatePokemon"
+    res.render('updatePokemon.twig', {
+        pokemons: pokemon
     })
 })
 

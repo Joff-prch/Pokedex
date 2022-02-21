@@ -1,13 +1,12 @@
 {% include '/template/head.twig'%}
-<body>
-    <h1 class="text-center mt-5">Pokedex 2000</h1>
+<main>
+    <h1 class="text-center pt-5">Pokédex 2000</h1>
     <form class="border border-success formx" method="post">
         <h2>Connexion</h2>
         <input type="text" class="border border-success" method="post" placeholder="Nom du Dresseur" id="loginName" name="loginName">
         <a href="/inscription" class="connexion__a link-light">inscription</a>
-        <p class="p_error text-primary">{{error}}</p>
+        <p class="p_error text-danger">{{error}}</p>
         <button class="btn btn-success" type="submit">Se connecter</button>
     </form>
-    <footer></footer>
-</body>
-</html>
+</main>  
+{% include '/template/footer.twig'%}

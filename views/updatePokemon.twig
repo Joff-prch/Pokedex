@@ -1,0 +1,25 @@
+
+{% include '/template/head.twig'%}
+{# {% block updater %} #}
+ <form class="main_form" method="post">
+        <div class="form_title">
+            <h3>Modifier un Pokemon</h3>
+            <a href='/pokedex' class="btn btn-danger">X</a>
+        </div>
+		<div class="">
+			<label class="form-label">Nom</label>
+			<input type="text" class="form-control" id="pokemonName" name="name" value="{{pokemons.name}}" required>
+		</div>
+		<div class="">
+			<label class="form-label">Vie</label>
+			<input type="number" class="form-control" id="pokemonHP" name="pv" value="{{pokemons.pv}}" required>
+		</div>
+        <div class="">
+			<label class="form-label">Dégats</label>
+			<input type="number" class="form-control" id="pokemonDPS" name="dps" value="{{pokemons.dps}}" required>
+		</div>
+		
+		<button type="submit" class="btn btn-primary">Modifier</button>
+	</form>
+{# {% endblock %} #}
+{% include '/template/footer.twig'%}

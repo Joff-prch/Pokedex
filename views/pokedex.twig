@@ -1,28 +1,28 @@
 {% include '/template/head.twig'%}
-<body>
+{# {% block updater %}{% endblock %} #}
 	<a href="/" onclick="disconnect()">Déconnexion</a>
 	<h1 class="text-center mt-5">Pokedex 2000</h1>
 	<div class="main_content">
 		<div class="main_header">
-			<h2 class="text-wrap">Total Pokemon : {{totalPokemons}} (current : {{currentPokemons}} )</h2>
+			<h2 class="text-wrap">Total Pokémon : {{totalPokemons}} (current : {{currentPokemons}} )</h2>
 			<div class="badge-xl">badge : {{badges}}</div>
 			<div class="badge-sm"><i class="uil uil-award"></i> : {{badges}}</div>
-			<a href="/addPokemon" class="add_pokemon">Ajouter <span>un Pokemon</span></a>
+			<a href="/addPokemon" class="add_pokemon">Capturer <span>un Pokémon</span></a>
 		</div>
-		{% block main %}{% endblock %}
 		<div class="main_body_card">
+		
 		{% for pokemon in pokemons %}
 			<div class="col-xl-3 col-lg-4 col-sm-6 col-12 card">
 				<div class="card-body">
 					<img class="poke_img" src="{{pokemon.src}}">
 					<h5 class="card-title">{{pokemon.name}}</h5>
-					<p class="card-text">Attack Power: {{pokemon.dps}}</p>
-					<p class="card-text">Health: {{pokemon.pv}}</p>
+					<p class="card-text">Dégats: {{pokemon.dps}}</p>
+					<p class="card-text">Vie: {{pokemon.pv}}</p>
 					<p class="card-text">Type : {{pokemon.type}}</p>
 					<div class="row">
 						<div class="col-md-12 text-center">
-
-							<a href="/deletePokemon/{{pokemon._id}}" class="btn btn-danger ">supprimer</a>
+							<a href="/deletePokemon/{{pokemon._id}}" class="btn btn-danger ">Supprimer</a>
+							<a href="/updatePokemon/{{pokemon._id}}" class="btn btn-primary ">Modifier</a>
 						</div>
 					</div>
 				</div>
@@ -31,5 +31,4 @@
 		</div>
 	</div>
 
-	<script src='./main.js'></script>
-</body></html>
+{% include '/template/footer.twig'%}
