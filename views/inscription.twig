@@ -1,8 +1,8 @@
 {% include '/template/head.twig'%}
 <main>
-    <h1 class="text-center pt-5">Pokédex 2000</h1>
+    <h1 class="text-center pt-5 text-white">Pokédex 2000</h1>
     <form class="border border-success formx" method="post" action="{% if action == "/updateUser" %}{{action}}/{{dresseur._id}}{% else %}{{action}}{% endif %}">
-        <h2>Inscription</h2>
+        <h2 class="text-white">Inscription</h2>
         <input type="text" class="border border-success" placeholder="Nom du Dresseur" id="name" name="name" value="{{dresseur.name}}">
         <a href="/" class="inscription__a link-light">Déjà inscrit? Accueil</a>
         <p class="p_error text-danger">{{error}}</p>

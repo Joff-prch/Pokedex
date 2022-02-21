@@ -149,19 +149,26 @@ main {
 .badge-sm {
     display: none;
 }
-@media (max-width: 1024px) {
-  
+@media (min-width: 1224px) {
+    .main_header h2{
+        font-size: 30px;
+        top: 4px
+    }
 }
 
 @media (max-width: 824px) {
     .main_content{
         width: 90vw
     }
+    .main_header h2{
+        font-size: 3vw;
+        top: 4px
+    }
 }
 
 @media (max-width: 624px) {
     .main_header{
-        padding: 0 3px;
+        margin: 0 7px;
     }
     .main_header h2{
         font-size: 3.5vw;
